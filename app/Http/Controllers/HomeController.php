@@ -31,6 +31,13 @@ class HomeController extends Controller
     $childs = new ChildController();
     $myChilds = $childs->showInHome();
 
-    return view('home', \compact('nameUser', 'myChilds'));
+    if (Auth::user()->type == 'parent'){
+      return view('home', \compact('nameUser', 'myChilds'));
+    } else {
+      $isChild = true;
+      return view('home', \compact('isChild', 'nameUser'));
+    }
+
+
   }
 }

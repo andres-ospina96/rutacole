@@ -7,27 +7,36 @@
       <div class="row">
         <div class="col-md-12 border rounded p-3">
           <h1 class="">Hola {{ $nameUser }}</h1>
-          <p>Mira aquí la información de tus hijos</p>
-          <div class="row justify-content-center">
-            <div class="col-md-11">
-              <ul class="list-group">
-                @forelse($myChilds as $child)
-                  <li class="list-group-item">
-                    {{$child->name}}
-                    <a href="{{ route('child.edit', [$child->id]) }}">
-                      <i style="color:darkblue;" class="ml-3 fas fa-edit"></i>
-                    </a>
-                    <a href="{{ route('child.destroy', [$child->id]) }}">
-                      <i style="color:darkblue;" class="ml-1 fas fa-trash-alt"></i>
-                    </a>
-                  </li>  
-                @empty
-                  <li>Aún no has añadido a tus hijos</li>
-                @endforelse
-              </ul>
+          @if (Auth::user()->type == 'parent')
+            <p>Mira aquí la información de tus hijos</p>
+            <div class="row justify-content-center">
+              <div class="col-md-11">
+                <ul class="list-group">
+                  @forelse($myChilds as $child)
+                    <li class="list-group-item">
+                      {{$child->name}}
+                      <a href="{{ route('child.edit', [$child->id]) }}">
+                        <i style="color:darkblue;" class="ml-3 fas fa-edit"></i>
+                      </a>
+                      <a href="{{ route('child.destroy', [$child->id]) }}">
+                        <i style="color:darkblue;" class="ml-1 fas fa-trash-alt"></i>
+                      </a>
+                    </li>  
+                  @empty
+                    <li>Aún no has añadido a tus hijos</li>
+                  @endforelse
+                </ul>
+              </div>
+              <a href="{{ route('child.new') }}" class="btn btn-primary m-3">Añade hijo</a> 
+            </div>              
+          @else            
+            <div class="row justify-content-center">
+              <div class="col-md-11">
+                <p>Haz clic en el botón para iniciar ruta</p>
+                <a href="" class="btn btn-primary">Iniciar ruta</a>
+              </div>
             </div>
-            <a href="{{ route('child.new') }}" class="btn btn-primary m-3">Añade hijo</a> 
-          </div>
+          @endif
         </div>
 
       </div>

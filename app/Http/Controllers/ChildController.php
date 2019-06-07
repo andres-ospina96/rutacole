@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Child;
 use Auth;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class ChildController extends Controller
 {
@@ -27,6 +29,7 @@ class ChildController extends Controller
   {
     $childs = Child::where('parent', Auth::id())->get();
     return $childs;
+    
   }
 
   /**
@@ -57,6 +60,13 @@ class ChildController extends Controller
       'password' => $password,
       'parent' => $parent,
     ]);
+
+    $newUser = new User();
+    $newUser->name = $name;
+    $newUser->email = $request->email;
+    $newUser->password = Hash::make($password);
+    $newUser->type = 'child';
+    $newUser->save();
 
     return redirect()->route('home');
 
