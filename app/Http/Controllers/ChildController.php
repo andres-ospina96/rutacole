@@ -59,6 +59,7 @@ class ChildController extends Controller
       'name' => $name,
       'password' => $password,
       'parent' => $parent,
+      'email' => $request->email
     ]);
 
     $newUser = new User();

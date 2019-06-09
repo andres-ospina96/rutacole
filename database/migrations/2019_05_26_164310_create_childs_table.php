@@ -16,6 +16,7 @@ class CreateChildsTable extends Migration
         Schema::create('children', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('email')->unique();
             $table->string('password');
             $table->unsignedBigInteger('parent');
             $table->foreign('parent')->references('id')->on('users');

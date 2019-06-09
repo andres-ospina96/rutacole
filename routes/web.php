@@ -24,4 +24,8 @@ Route::get('child/edit/{id}', 'ChildController@edit')->name('child.edit');
 Route::post('child/store', 'ChildController@store')->name('child.store');
 Route::post('child/update', 'ChildController@update')->name('child.update');
 Route::get('child/destroy/{id}', 'ChildController@destroy')->name('child.destroy');
+Route::get('location/{email}', 'LocationController@index')->name('location.index');
+Route::get('location/show/{id}', 'LocationController@show')->name('location.show');
+Route::post('location/store', 'LocationController@store')->name('location.store');
+Route::post('location/update', 'LocationController@update')->name('location.update');
 Route::get('/home', 'HomeController@index')->name('home');
